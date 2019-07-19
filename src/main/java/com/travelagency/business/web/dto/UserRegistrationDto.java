@@ -92,4 +92,11 @@ public class UserRegistrationDto {
         this.terms = terms;
     }
 
+	@Override
+	public String toString() {
+		return "UserRegistrationDto [firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
+				+ ", confirmPassword=" + confirmPassword + ", email=" + email + ", confirmEmail=" + confirmEmail
+				+ ", terms=" + terms + "]";
+	}
+
 }

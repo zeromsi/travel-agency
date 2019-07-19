@@ -32,14 +32,22 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public User save(UserRegistrationDto registration){
+    public void save(UserRegistrationDto registration) throws Exception{
+   
         User user = new User();
         user.setFirstName(registration.getFirstName());
         user.setLastName(registration.getLastName());
-        user.setEmail(registration.getEmail());
+       // user.setEmail(registration.getEmail());
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
-        return userRepository.save(user);
+        try {
+        	userRepository.save(user);
+        }catch(Exception e) {
+        	throw new Exception(e);
+        }
+	
+       
+    
     }
 
     @Override

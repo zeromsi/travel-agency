@@ -1,7 +1,6 @@
 package com.travelagency.business.web;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,6 @@ import com.travelagency.data.User;
 @Controller
 @RequestMapping("/registration")
 public class UserRegistrationController {
-
     @Autowired
     private UserService userService;
 
@@ -33,8 +31,9 @@ public class UserRegistrationController {
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto userDto,
-                                      BindingResult result){
-
+                                      BindingResult result) throws Exception{
+    
+     
         User existing = userService.findByEmail(userDto.getEmail());
         if (existing != null){
             result.rejectValue("email", null, "There email has been used!");
@@ -43,9 +42,13 @@ public class UserRegistrationController {
         if (result.hasErrors()){
             return "registration";
         }
-
+try {
         userService.save(userDto);
         return "redirect:/registration?success";
+}catch(Exception e) {
+    return "redirect:/registration?failed";
+}
+    
     }
 
 }
