@@ -32,7 +32,6 @@ public class PostServiceImpl implements PostService {
 	public void save(@Valid PostDto postDto) throws Exception {
 		Post post = new Post();
 		post.setBody(postDto.getBody());
-		post.setId(postDto.getId());
 		post.setCreatedAt(new Date());
 		post.setLastUpdatedAt(new Date());
 		post.setOwner(postDto.getOwner());
@@ -45,6 +44,25 @@ public class PostServiceImpl implements PostService {
 		}
 
 	}
+	
+	
+	@Override
+	public void update(@Valid PostDto postDto) throws Exception {
+		Post post = postRepository.getOne(postDto.getId());
+		post.setBody(postDto.getBody());
+		post.setLastUpdatedAt(new Date());
+		post.setVisibility(postDto.getVisibility());
+		post.setLocation(new Location(1L));
+		try {
+			postRepository.save(post);
+		} catch (Exception e) {
+			throw new Exception(e);
+		}
+
+	}
+	
+	
+	
 	@Override
 	public List<Post> findAllPublicPosts(){
 		return postRepository.findAllPublicPosts(Visibility.PUBLIC.toString());

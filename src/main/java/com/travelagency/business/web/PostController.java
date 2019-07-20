@@ -83,7 +83,7 @@ public class PostController {
 		try {
 			Post post = postService.findByIdAndUserId(id, user.getId());
 			postDto.setOwner(user);
-			postService.save(postDto);
+			postService.update(postDto);
 			return "redirect:";
 		} catch (Exception e) {
 			return "redirect:/?failed";

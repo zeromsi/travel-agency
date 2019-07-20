@@ -18,4 +18,6 @@ public interface PostService {
 
 	Post findByIdAndUserId(Long id, Long userId)  throws Exception;
 
+	void update(@Valid PostDto postDto) throws Exception;
+
 }
