@@ -11,7 +11,7 @@
 #### Enjoy your time
 
 ## Database schema
-#### ```Location``` Table
+#### ```Location``` Table. This table holds Location information.
 ```xml
 CREATE TABLE `location` (
   `id` bigint(20) NOT NULL,
@@ -23,14 +23,14 @@ INSERT INTO `location` (`id`, `name`) VALUES
 (2, 'Bandarban'),
 (3, 'Khulna')
 ```
-#### ```Role``` Table
+#### ```Role``` Table. This Table holds Role Information
 ```xml
 CREATE TABLE `role` (
   `id` bigint(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ```
-#### ```User``` Table
+#### ```User``` Table. This Table holds User Information
 
 ```xml
 CREATE TABLE `user` (
@@ -42,7 +42,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ```
 
-#### ```Users_Roles``` Table
+#### ```Users_Roles``` Table. This Table is the Linked table of user and role
 
 ```xml
 CREATE TABLE `users_roles` (
@@ -51,7 +51,7 @@ CREATE TABLE `users_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ```
 
-#### ```post``` Table
+#### ```post``` Table. This table holds all Posts(Status)
 
 ```xml
 CREATE TABLE `post` (
@@ -64,7 +64,7 @@ CREATE TABLE `post` (
   `owner` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ```
-#### ```Pinned_Post``` Table
+#### ```Pinned_Post``` Table. This table tracks pinned record of an user
 
 ```xml
 CREATE TABLE `pinned_post` (
