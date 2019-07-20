@@ -106,4 +106,9 @@ public class User {
                 ", roles=" + roles +
                 '}';
     }
+
+	public User(Long id) {
+		super();
+		this.id = id;
+	}
 }

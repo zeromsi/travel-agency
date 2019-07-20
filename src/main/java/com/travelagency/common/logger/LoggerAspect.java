@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.CodeSignature;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.travelagency.data.User;
@@ -26,14 +27,14 @@ public class LoggerAspect {
 		StringBuffer parameters = new StringBuffer();
 		getParametersAndValuesAsStringBuffer(joinPoint, codeSignature, parameters);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long userId;
+		String userName;
 		try {
-		User user = (User)authentication.getPrincipal();
-		userId = user.getId();
+			UserDetails userDetails  = (UserDetails)authentication.getPrincipal();
+			userName = userDetails.getUsername();
 		}catch(Exception e) {
-			userId = 0L;
+			userName = "anonymous";
 		}
-		LogFormat log=new LogFormat( joinPoint.getTarget().getClass().getSimpleName(), joinPoint.getSignature().getName(), ex.toString(), parameters.toString(), userId);
+		LogFormat log=new LogFormat( joinPoint.getTarget().getClass().getSimpleName(), joinPoint.getSignature().getName(), ex.toString(), parameters.toString(), userName);
 	
 		LOGGER.log(Level.WARNING, log.toString());
 	}

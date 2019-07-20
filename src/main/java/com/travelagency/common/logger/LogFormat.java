@@ -1,6 +1,7 @@
 package com.travelagency.common.logger;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class LogFormat {
 	private String id;
@@ -9,7 +10,7 @@ public class LogFormat {
 	private String methodName;
 	private String result;
 	private String parameters;
-	private Long userId;
+	private String userName;
 	
 	public String getId() {
 		return id;
@@ -48,27 +49,29 @@ public class LogFormat {
 		this.parameters = parameters;
 	}
 
-	public Long getUserId() {
-		return userId;
+
+	public String getUserName() {
+		return userName;
 	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public LogFormat(String className, String methodName, String result, String parameters, Long userId) {
+	public LogFormat(String className, String methodName, String result, String parameters, String userName) {
 		super();
-		this.id = new Date().getTime()+""+userId;
+		this.id = UUID.randomUUID().toString();
 		this.timestamp = new Date();
 		this.className = className;
 		this.methodName = methodName;
 		this.result = result;
 		this.parameters = parameters;
-		this.userId = userId;
+		this.userName = userName;
 	}
 	@Override
 	public String toString() {
 		return "LogFormat [id=" + id + ", timestamp=" + timestamp + ", className=" + className + ", methodName="
-				+ methodName + ", result=" + result + ", parameters=" + parameters + ", userId=" + userId + "]";
+				+ methodName + ", result=" + result + ", parameters=" + parameters + ", userName=" + userName + "]";
 	}
+
 	
 	
 }

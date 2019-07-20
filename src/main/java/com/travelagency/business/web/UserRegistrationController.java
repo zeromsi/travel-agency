@@ -16,39 +16,38 @@ import com.travelagency.data.User;
 @Controller
 @RequestMapping("/registration")
 public class UserRegistrationController {
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @ModelAttribute("user")
-    public UserRegistrationDto userRegistrationDto() {
-        return new UserRegistrationDto();
-    }
+	@ModelAttribute("user")
+	public UserRegistrationDto userRegistrationDto() {
+		return new UserRegistrationDto();
+	}
 
-    @GetMapping
-    public String showRegistrationForm(Model model) {
-        return "registration";
-    }
+	@GetMapping
+	public String showRegistrationForm(Model model) {
+		return "registration";
+	}
 
-    @PostMapping
-    public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto userDto,
-                                      BindingResult result) throws Exception{
-    
-     
-        User existing = userService.findByEmail(userDto.getEmail());
-        if (existing != null){
-            result.rejectValue("email", null, "There email has been used!");
-        }
+	@PostMapping
+	public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto userDto, BindingResult result)
+			throws Exception {
 
-        if (result.hasErrors()){
-            return "registration";
-        }
-try {
-        userService.save(userDto);
-        return "redirect:/registration?success";
-}catch(Exception e) {
-    return "redirect:/registration?failed";
-}
-    
-    }
+		User existing = userService.findByEmail(userDto.getEmail());
+		if (existing != null) {
+			result.rejectValue("email", null, "There email has been used!");
+		}
+
+		if (result.hasErrors()) {
+			return "registration";
+		}
+		try {
+			userService.save(userDto);
+			return "redirect:/registration?success";
+		} catch (Exception e) {
+			return "redirect:/registration?failed";
+		}
+
+	}
 
 }

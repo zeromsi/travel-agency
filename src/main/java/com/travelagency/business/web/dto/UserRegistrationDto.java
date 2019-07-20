@@ -26,7 +26,7 @@ public class UserRegistrationDto {
     private String confirmPassword;
 
     @Email
-    @NotEmpty
+    @NotEmpty(message = "Email must not be empty")
     private String email;
 
     @Email

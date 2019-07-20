@@ -5,4 +5,4 @@
  * @author zeromsi
  *
  */
-package com.travelagency.common;
+package com.travelagency.common.util;
