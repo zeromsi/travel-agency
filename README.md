@@ -59,7 +59,7 @@ CREATE TABLE `post` (
   `body` varchar(255) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `last_updated_at` datetime DEFAULT NULL,
-  `visibility` varchar(255) DEFAULT NULL,
+  `visibility` varchar(15) DEFAULT NULL,
   `location` bigint(20) DEFAULT NULL,
   `owner` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -73,4 +73,7 @@ CREATE TABLE `pinned_post` (
   `post` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ```
+## ER Diagram
+
+![ERD](https://github.com/zeromsi/travel-agency/blob/master/ERD.png)
 
