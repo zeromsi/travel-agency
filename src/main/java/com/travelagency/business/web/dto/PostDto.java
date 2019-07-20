@@ -15,7 +15,7 @@ public class PostDto {
 	private String visibility; 
 	
 	private User owner;
-
+	
 	private Location location;
 	
 	public User getOwner() {

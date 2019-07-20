@@ -44,16 +44,17 @@ public class PostController {
 
 	@PostMapping("/post")
 	public String post(@ModelAttribute("post") @Valid PostDto postDto, BindingResult result) throws Exception {
-
+		if(postDto.getBody().trim().isEmpty()) {
+			return "redirect:/?failed";
+		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
 		postDto.setOwner(userService.findByEmail(userDetails.getUsername()));
 		try {
 			postService.save(postDto);
 			return "redirect:";
 		} catch (Exception e) {
-			return "redirect:/?failed";
+			return "redirect:?failed";
 		}
 
 	}
