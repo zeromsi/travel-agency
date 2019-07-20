@@ -4,11 +4,11 @@
 ### Clone the project from github
 
 ### Setup Environment
-#### Create a database named ```travel-agency```
-#### Go inside project 
-#### Open terminal and run ```mvn spring-boot:run ```
-#### Browse ```http://localhost:8080/ ``` on your browser
-#### Enjoy your time
+* Create a database named ```travel-agency```
+* Go inside project 
+* Open terminal and run ```mvn spring-boot:run ```
+* Browse ```http://localhost:8080/ ``` on your browser
+* Enjoy your time
 
 ## Database schema
 #### ```Location``` Table. This table holds Location information.
