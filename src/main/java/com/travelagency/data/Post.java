@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
 public class Post {
 	@Id
@@ -28,6 +30,7 @@ public class Post {
 	
 	private Date lastUpdatedAt;
 	
+	@Length(max=15)
 	private String visibility;
 	
 	@OneToOne(fetch = FetchType.EAGER)
