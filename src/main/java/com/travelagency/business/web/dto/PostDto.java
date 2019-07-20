@@ -7,6 +7,8 @@ import com.travelagency.data.User;
 
 
 public class PostDto {
+	private Long id;
+	
 	@NotEmpty
 	private String body;
 
@@ -50,11 +52,22 @@ public class PostDto {
 		this.location = location;
 	}
 
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
-		return "PostDto [body=" + body + ", visibility=" + visibility + ", owner=" + owner + ", location=" + location
-				+ "]";
+		return "PostDto [id=" + id + ", body=" + body + ", visibility=" + visibility + ", owner=" + owner
+				+ ", location=" + location + "]";
 	}
+
 
 
 }

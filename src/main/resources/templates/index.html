@@ -83,7 +83,7 @@
 				</form>
 			</div>
 		</div>
-<br>
+		<br>
 		<div class="row">
 
 
@@ -92,19 +92,16 @@
 
 				<span class="glyphicon glyphicon-user"></span> <span
 					th:value="${post.owner.firstName}"
-					th:text="${post.owner.firstName}"></span> was at <i class="material-icons"
-					style="font-size: 17px">place</i> <a href="#"> <span
-					th:value="${post.location.name}" th:text="${post.location.name}"></span></a>
+					th:text="${post.owner.firstName}"></span> was at <i
+					class="material-icons" style="font-size: 17px">place</i> <a
+					href="#"> <span th:value="${post.location.name}"
+					th:text="${post.location.name}"></span></a> <br> <span
+					class="glyphicon glyphicon-time"> </span> <span
+					th:value="${post.lastUpdatedAt}" th:text="${post.lastUpdatedAt}"
+					style="font-size: 11px; color: #80bd9e"></span> <br>
 
-
-				<br> 
-				
-				<span class="glyphicon glyphicon-time" > </span> 
-				<span
-					th:value="${post.lastUpdatedAt}" th:text="${post.lastUpdatedAt}" style="font-size:11px; color:#80bd9e"></span>
-				<br>
-
-			  <pre th:value="${post.body}" th:text="${post.body}" style="background-color: #FFFFFF;"> </pre>
+				<pre th:value="${post.body}" th:text="${post.body}"
+					style="background-color: #FFFFFF;"> </pre>
 
 			</div>
 

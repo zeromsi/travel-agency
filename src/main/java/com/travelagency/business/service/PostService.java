@@ -16,4 +16,6 @@ public interface PostService {
 
 	List<Post> findAllPostsByUserId(Long id);
 
+	Post findByIdAndUserId(Long id, Long userId)  throws Exception;
+
 }

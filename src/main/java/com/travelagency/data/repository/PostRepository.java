@@ -13,9 +13,10 @@ import com.travelagency.data.Post;
 public interface PostRepository extends JpaRepository<Post,Long>{
 
 
-	@Query("SELECT g FROM Post g where g.visibility=:visibility order by g.lastUpdatedAt")
+	@Query("SELECT g FROM Post g where g.visibility=:visibility order by g.lastUpdatedAt DESC")
 	List<Post> findAllPublicPosts(@Param("visibility")String visibility);
 
-	List<Post> findAllByOwnerIdOrderByLastUpdatedAt(Long id);
+	List<Post> findAllByOwnerIdOrderByLastUpdatedAtDesc(Long id);
+
 
 }

@@ -14,50 +14,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-<style>
-.dropbtn {
-	background-color: #f5f6f7;
-	color: black;
-	padding: 16px;
-	font-size: 16px;
-	border: none;
-	cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-	color: #2980B9;
-}
-
-.dropdown {
-	position: relative;
-	display: inline-block;
-}
-
-.dropdown-content {
-	display: none;
-	position: absolute;
-	background-color: #f1f1f1;
-	min-width: 160px;
-	overflow: auto;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-	z-index: 1;
-}
-
-.dropdown-content a {
-	color: black;
-	padding: 12px 16px;
-	text-decoration: none;
-	display: block;
-}
-
-.dropdown a:hover {
-	background-color: #ddd;
-}
-
-.show {
-	display: block;
-}
-</style>
 
 <title>Home</title>
 </head>
@@ -91,13 +47,12 @@
 	<div class="container">
 		<div class="row">
 			<p class="col-md-6 col-md-offset-3"
-				style="background: #f5f6f7; border-bottom: 1px solid #dddfe2; border-radius: 2px 2px 0 0; font-weight: bold; padding: 8px 6px">Create
-				A Post</p>
+				style="background: #f5f6f7; border-bottom: 1px solid #dddfe2; border-radius: 2px 2px 0 0; font-weight: bold; padding: 8px 6px">Update
+				Post</p>
 			<div class="col-md-6 col-md-offset-3">
-
-				<form th:action="@{/post}" method="post">
+				<form th:action="@{/post(id=${post.id})}"  th:field="*{post}" th:method="put" >
 					<div class="form-group">
-						<textarea rows="5" cols="90" id="body" name="body"
+						<textarea rows="5" cols="90" id="body" name="body" th:value="${post.body}" th:text="${post.body}"
 							class="form-control" autofocus="autofocus" placeholder="body">
 							
 							 </textarea>
@@ -125,7 +80,7 @@
 							<div class="row">
 								<div class="col-sm-12 ">
 									<input type="submit" name="post-submit" id="post-submit"
-										class="form-control btn btn-primary" value="Share" />
+										class="form-control btn btn-primary" value="Update" />
 								</div>
 							</div>
 						</div>
@@ -136,35 +91,7 @@
 		<div class="row">
 
 
-			<div class="col-md-6 col-md-offset-3" th:each="post : ${posts}"
-				style="background: #f5f6f7; border-bottom: 1px solid #dddfe2; border-radius: 2px 2px 0 0; font-weight: bold; padding: 8px 6px">
-
-				<span class="glyphicon glyphicon-user"></span> 
 		
-				
-				<span
-					th:value="${post.owner.firstName}"
-					th:text="${post.owner.firstName}"></span> was at <i
-					class="material-icons" style="font-size: 17px">place</i> <a
-					href="#"> <span th:value="${post.location.name}"
-					th:text="${post.location.name}"></span></a> <span class="dropdown">
-					<button onclick="myFunction()" class="dropbtn">...</button>
-					<div id="myDropdown" class="dropdown-content">
-						<a th:href="@{/post(id=${post.id})}"  id="id" name="id" th:value="${post.id}">Edit</a>
-					</div>
-				</span> <br> <span class="glyphicon glyphicon-time"> </span> <span
-					th:value="${post.lastUpdatedAt}" th:text="${post.lastUpdatedAt}"
-					style="font-size: 11px; color: #80bd9e"></span> <span
-					th:switch="${post.visibility}"> <i class="fa fa-globe"
-					aria-hidden="true" th:case="'PUBLIC'"></i> <i class="fa fa-lock"
-					aria-hidden="true" th:case="'PRIVATE'"></i>
-				</span> <br>
-
-				<pre th:value="${post.body}" th:text="${post.body}"
-					style="background-color: #FFFFFF;"> </pre>
-
-			</div>
-
 		</div>
 
 
@@ -175,28 +102,6 @@
 	<script type="text/javascript"
 		th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 
-	<script>
-		/* When the user clicks on the button, 
-		 toggle between hiding and showing the dropdown content */
-		function myFunction() {
-			document.getElementById("myDropdown").classList.toggle("show");
-		}
-
-		// Close the dropdown if the user clicks outside of it
-		window.onclick = function(event) {
-			if (!event.target.matches('.dropbtn')) {
-				var dropdowns = document
-						.getElementsByClassName("dropdown-content");
-				var i;
-				for (i = 0; i < dropdowns.length; i++) {
-					var openDropdown = dropdowns[i];
-					if (openDropdown.classList.contains('show')) {
-						openDropdown.classList.remove('show');
-					}
-				}
-			}
-		}
-	</script>
 
 
 

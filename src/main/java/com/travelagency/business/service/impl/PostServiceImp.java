@@ -28,6 +28,7 @@ public class PostServiceImp implements PostService {
 		System.out.println(postDto.toString());
 		Post post = new Post();
 		post.setBody(postDto.getBody());
+		post.setId(postDto.getId());
 		post.setCreatedAt(new Date());
 		post.setLastUpdatedAt(new Date());
 		post.setOwner(postDto.getOwner());
@@ -46,7 +47,21 @@ public class PostServiceImp implements PostService {
 	}
 	@Override
 	public List<Post> findAllPostsByUserId(Long id) {
-		return postRepository.findAllByOwnerIdOrderByLastUpdatedAt(id);
+		return postRepository.findAllByOwnerIdOrderByLastUpdatedAtDesc(id);
+	}
+	@Override
+	public Post findByIdAndUserId(Long id, Long userId) throws Exception {
+		try {
+		Post post=postRepository.findById(id).get();
+		if(post.getOwner().getId()!=userId) {
+			throw new Exception("Invalid Id");
+		}
+		return post;
+		}catch(Exception e) {
+			throw new Exception(e);
+		}
+	
+		
 	}
 
 }
