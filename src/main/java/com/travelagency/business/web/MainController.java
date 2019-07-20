@@ -29,6 +29,14 @@ public class MainController {
         return "login";
     }
     
+	@GetMapping("/")
+	public String root(Model model) {
+		model.addAttribute("locations", locationService.findAll());
+
+		model.addAttribute("posts", postService.findAllPublicPosts());
+		return "index";
+	}
+
     
     @GetMapping("/profile")
     public String profile(Model model) {

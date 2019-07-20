@@ -1,5 +1,6 @@
 package com.travelagency.business.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.travelagency.business.service.PinnedPostService;
 import com.travelagency.business.service.PostService;
 import com.travelagency.business.web.dto.PostDto;
 import com.travelagency.common.util.Visibility;
@@ -18,14 +20,16 @@ import com.travelagency.data.repository.PostRepository;
 
 
 @Service
-public class PostServiceImp implements PostService {
+public class PostServiceImpl implements PostService {
 
 	@Autowired
 	PostRepository postRepository;
+	
+	@Autowired
+	PinnedPostService pinnedPostService;
 
 	@Override
 	public void save(@Valid PostDto postDto) throws Exception {
-		System.out.println(postDto.toString());
 		Post post = new Post();
 		post.setBody(postDto.getBody());
 		post.setId(postDto.getId());
@@ -45,9 +49,21 @@ public class PostServiceImp implements PostService {
 	public List<Post> findAllPublicPosts(){
 		return postRepository.findAllPublicPosts(Visibility.PUBLIC.toString());
 	}
+	
+	
+	
 	@Override
 	public List<Post> findAllPostsByUserId(Long id) {
-		return postRepository.findAllByOwnerIdOrderByLastUpdatedAtDesc(id);
+		List<Post> posts=new ArrayList<>();
+		posts=postRepository.findAllByOwnerIdOrderByLastUpdatedAtDesc(id);
+		
+		Post pinnedPost=pinnedPostService.getPinnedPostByOwnerId(id).getPost();
+	
+		if(pinnedPost!=null) {
+			posts.remove(posts.indexOf(pinnedPost));
+			posts.add(0, pinnedPost);
+		}
+		return posts;
 	}
 	@Override
 	public Post findByIdAndUserId(Long id, Long userId) throws Exception {

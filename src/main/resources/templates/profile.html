@@ -13,7 +13,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 .dropbtn {
 	background-color: #f5f6f7;
@@ -59,7 +59,7 @@
 }
 </style>
 
-<title>Home</title>
+<title>Profile</title>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -139,19 +139,32 @@
 			<div class="col-md-6 col-md-offset-3" th:each="post : ${posts}"
 				style="background: #f5f6f7; border-bottom: 1px solid #dddfe2; border-radius: 2px 2px 0 0; font-weight: bold; padding: 8px 6px">
 
-				<span class="glyphicon glyphicon-user"></span> 
-		
-				
-				<span
+				<span class="glyphicon glyphicon-user"></span> <span
 					th:value="${post.owner.firstName}"
 					th:text="${post.owner.firstName}"></span> was at <i
 					class="material-icons" style="font-size: 17px">place</i> <a
 					href="#"> <span th:value="${post.location.name}"
-					th:text="${post.location.name}"></span></a> <span class="dropdown">
-					<button onclick="myFunction()" class="dropbtn">...</button>
-					<div id="myDropdown" class="dropdown-content">
-						<a th:href="@{/post(id=${post.id})}"  id="id" name="id" th:value="${post.id}">Edit</a>
+					th:text="${post.location.name}"></span></a> <span class="dropdown"
+					style="float: right">
+					<button th:id="'myDropdown-button-'+${post.id}" class="dropbtn">...</button>		
+					<div th:id="'myDropdown-'+${post.id}" class="dropdown-content">
+						<a th:href="@{/post(id=${post.id})}" id="id" name="id"
+							th:value="${post.id}">Edit</a> <a
+							th:href="@{'/post/'+${post.id}+'/pin/'}" id="id" name="id"
+							th:value="${post.id}" th:method="put">Pin</a>
 					</div>
+					<script type="text/javascript" th:inline="javascript">
+						$("#myDropdown-button-"+/*[[${post.id}]]*/).on("click", function() {
+							var id = /*[[${post.id}]]*/;
+							console.log("clicked...."+id);
+							$(".dropdown-content").hide();
+							$("#myDropdown-"+id).show();
+						});
+					
+					</script>
+
+
+
 				</span> <br> <span class="glyphicon glyphicon-time"> </span> <span
 					th:value="${post.lastUpdatedAt}" th:text="${post.lastUpdatedAt}"
 					style="font-size: 11px; color: #80bd9e"></span> <span
@@ -178,9 +191,7 @@
 	<script>
 		/* When the user clicks on the button, 
 		 toggle between hiding and showing the dropdown content */
-		function myFunction() {
-			document.getElementById("myDropdown").classList.toggle("show");
-		}
+		
 
 		// Close the dropdown if the user clicks outside of it
 		window.onclick = function(event) {
