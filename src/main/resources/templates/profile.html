@@ -120,8 +120,8 @@
 							</div>
 
 						<div class="col-md-6 ">
-								<select th:field="*{locations}" >
-									<option th:each="location : ${locations}" id="location" name="location"
+								<select th:field="*{locations}" id="location" name="location">
+									<option th:each="location : ${locations}"
 										 th:text="${location.name}" th:value="${location.id}"></option>
 								</select>
 							</div>
