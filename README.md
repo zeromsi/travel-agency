@@ -21,7 +21,7 @@ CREATE TABLE `location` (
 INSERT INTO `location` (`id`, `name`) VALUES
 (1, 'Sylhet'),
 (2, 'Bandarban'),
-(3, 'Khulna')
+(3, 'Khulna');
 ```
 #### ```Role``` Table. This Table holds Role Information
 ```xml
@@ -29,6 +29,8 @@ CREATE TABLE `role` (
   `id` bigint(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `role` (`id`, `name`) VALUES ('1', 'ROLE_USER');
 ```
 #### ```User``` Table. This Table holds User Information
 

@@ -18,13 +18,12 @@ import com.travelagency.data.Post;
 import com.travelagency.data.User;
 import com.travelagency.data.repository.PostRepository;
 
-
 @Service
 public class PostServiceImpl implements PostService {
 
 	@Autowired
 	PostRepository postRepository;
-	
+
 	@Autowired
 	PinnedPostService pinnedPostService;
 
@@ -44,8 +43,7 @@ public class PostServiceImpl implements PostService {
 		}
 
 	}
-	
-	
+
 	@Override
 	public void update(@Valid PostDto postDto) throws Exception {
 		Post post = postRepository.getOne(postDto.getId());
@@ -60,42 +58,41 @@ public class PostServiceImpl implements PostService {
 		}
 
 	}
-	
-	
-	
+
 	@Override
-	public List<Post> findAllPublicPosts(){
+	public List<Post> findAllPublicPosts() {
 		return postRepository.findAllPublicPosts(Visibility.PUBLIC.toString());
 	}
-	
-	
-	
+
 	@Override
 	public List<Post> findAllPostsByUserId(Long id) {
-		List<Post> posts=new ArrayList<>();
-		posts=postRepository.findAllByOwnerIdOrderByLastUpdatedAtDesc(id);
-		
-		Post pinnedPost=pinnedPostService.getPinnedPostByOwnerId(id).getPost();
-	
-		if(pinnedPost!=null) {
-			posts.remove(posts.indexOf(pinnedPost));
-			posts.add(0, pinnedPost);
+		List<Post> posts = new ArrayList<>();
+		posts = postRepository.findAllByOwnerIdOrderByLastUpdatedAtDesc(id);
+		try {
+			Post pinnedPost = pinnedPostService.getPinnedPostByOwnerId(id).getPost();
+
+			if (pinnedPost != null) {
+				posts.remove(posts.indexOf(pinnedPost));
+				posts.add(0, pinnedPost);
+			}
+		} catch (Exception e) {
+
 		}
 		return posts;
 	}
+
 	@Override
 	public Post findByIdAndUserId(Long id, Long userId) throws Exception {
 		try {
-		Post post=postRepository.findById(id).get();
-		if(post.getOwner().getId()!=userId) {
-			throw new Exception("Invalid Id");
-		}
-		return post;
-		}catch(Exception e) {
+			Post post = postRepository.findById(id).get();
+			if (post.getOwner().getId() != userId) {
+				throw new Exception("Invalid Id");
+			}
+			return post;
+		} catch (Exception e) {
 			throw new Exception(e);
 		}
-	
-		
+
 	}
 
 }

@@ -13,7 +13,8 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 .dropbtn {
 	background-color: #f5f6f7;
@@ -96,7 +97,7 @@
 			<div class="col-md-6 col-md-offset-3">
 
 
-	<div th:if="${param.failed}">
+				<div th:if="${param.failed}">
 					<div class="alert alert-danger">Something went wrong!</div>
 				</div>
 
@@ -118,7 +119,7 @@
 									type="radio" id="visibility" name="visibility" value="PRIVATE">Private</label>
 							</div>
 
-							<div class="col-md-6 ">
+						<div class="col-md-6 ">
 								<select th:field="*{locations}" >
 									<option th:each="location : ${locations}" id="location" name="location"
 										 th:text="${location.name}" th:value="${location.id}"></option>
@@ -133,6 +134,7 @@
 										class="form-control btn btn-primary" value="Share" />
 								</div>
 							</div>
+						</div>
 						</div>
 				</form>
 			</div>
@@ -151,14 +153,13 @@
 					href="#"> <span th:value="${post.location.name}"
 					th:text="${post.location.name}"></span></a> <span class="dropdown"
 					style="float: right">
-					<button th:id="'myDropdown-button-'+${post.id}" class="dropbtn">...</button>		
+					<button th:id="'myDropdown-button-'+${post.id}" class="dropbtn">...</button>
 					<div th:id="'myDropdown-'+${post.id}" class="dropdown-content">
 						<a th:href="@{/post(id=${post.id})}" id="id" name="id"
 							th:value="${post.id}">Edit</a> <a
 							th:href="@{'/post/'+${post.id}+'/pin/'}" id="id" name="id"
 							th:value="${post.id}" th:method="put">Pin</a>
-					</div>
-					<script type="text/javascript" th:inline="javascript">
+					</div> <script type="text/javascript" th:inline="javascript">
 						$("#myDropdown-button-"+/*[[${post.id}]]*/).on("click", function() {
 							var id = /*[[${post.id}]]*/;
 							console.log("clicked...."+id);

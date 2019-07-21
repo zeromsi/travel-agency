@@ -47,6 +47,7 @@ public class PostController {
 		if(postDto.getBody().trim().isEmpty()) {
 			return "redirect:/?failed";
 		}
+		System.out.println(postDto.getLocation());
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		postDto.setOwner(userService.findByEmail(userDetails.getUsername()));
