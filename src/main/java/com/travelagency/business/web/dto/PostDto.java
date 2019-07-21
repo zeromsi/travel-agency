@@ -16,6 +16,8 @@ public class PostDto {
 	
 	private User owner;
 	
+	//private Long locationId;
+	
 	private Location location;
 	
 	public User getOwner() {
@@ -57,6 +59,20 @@ public class PostDto {
 	public Long getId() {
 		return id;
 	}
+
+//	@Override
+//	public String toString() {
+//		return "PostDto [id=" + id + ", body=" + body + ", visibility=" + visibility + ", owner=" + owner
+//				+ ", locationId=" + locationId + "]";
+//	}
+//
+//	public Long getLocationId() {
+//		return locationId;
+//	}
+//
+//	public void setLocationId(Long locationId) {
+//		this.locationId = locationId;
+//	}
 
 	public void setId(Long id) {
 		this.id = id;

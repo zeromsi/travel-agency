@@ -30,12 +30,12 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public void save(@Valid PostDto postDto) throws Exception {
 		Post post = new Post();
-		post.setBody(postDto.getBody());
+		post.setBody(postDto.getBody().trim());
 		post.setCreatedAt(new Date());
 		post.setLastUpdatedAt(new Date());
 		post.setOwner(postDto.getOwner());
 		post.setVisibility(postDto.getVisibility());
-		post.setLocation(new Location(1L));
+		post.setLocation(new Location(postDto.getLocation().getId()));
 		try {
 			postRepository.save(post);
 		} catch (Exception e) {
@@ -47,7 +47,7 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public void update(@Valid PostDto postDto) throws Exception {
 		Post post = postRepository.getOne(postDto.getId());
-		post.setBody(postDto.getBody());
+		post.setBody(postDto.getBody().trim());
 		post.setLastUpdatedAt(new Date());
 		post.setVisibility(postDto.getVisibility());
 		post.setLocation(new Location(1L));
