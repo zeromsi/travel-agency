@@ -30,7 +30,7 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public void save(@Valid PostDto postDto) throws Exception {
 		Post post = new Post();
-		post.setBody(postDto.getBody());
+		post.setBody(postDto.getBody().trim());
 		post.setCreatedAt(new Date());
 		post.setLastUpdatedAt(new Date());
 		post.setOwner(postDto.getOwner());
